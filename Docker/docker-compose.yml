@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  quark:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: quark-server
+    ports:
+      - "8080:8080" # Ce port est mappé pour le reverse proxy interne, mais pas exposé à l'extérieur
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-reverse-proxy
+    ports:
+      - "80:80" # Expose le port 80 pour l'accès externe
+    networks:
+      - webnet
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - quark
+    restart: unless-stopped
+
+networks:
+  webnet:
+    driver: bridge

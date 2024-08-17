@@ -1,0 +1,35 @@
+# Stage 1: Build Quark
+FROM alpine:latest AS builder
+
+# Install build dependencies
+RUN apk add --no-cache build-base git curl
+
+# Clone Quark repository and enter directory
+WORKDIR /quark
+RUN git clone https://git.suckless.org/quark .
+
+# Build Quark
+RUN make
+
+# Stage 2: Create minimal image for running Quark
+FROM alpine:latest
+
+# Copy compiled binary from previous stage
+COPY --from=builder /quark/quark /usr/local/bin/quark
+
+# Create directory for static files
+RUN mkdir -p /var/www/html
+
+# Copy static files from host system
+COPY root /var/www/html
+
+# Set default directory for web server
+WORKDIR /var/www/html
+
+EXPOSE 8080
+
+# Set default entrypoint with basic parameters
+ENTRYPOINT ["quark"]
+
+# Définir les options par défaut pour le serveur
+CMD ["-d", "/var/www/html/", "-i", "index.html", "-h", "0.0.0.0", "-p", "8080"]

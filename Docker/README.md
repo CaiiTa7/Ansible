@@ -21,10 +21,14 @@
  ## 📦 Structure du Projet
  ```plaintext
  .
- ├── Dockerfile             # Dockerfile pour construire l'image du serveur Quark
- ├── docker-compose.yml     # Fichier de configuration Docker Compose
- ├── nginx.conf             # Fichier de configuration Nginx pour le reverse proxy
- └── README.md              # Fichier README du projet
+
+├── Dockerfile             # Dockerfile pour construire l'image du serveur Quark
+├── docker-compose.yml     # Fichier de configuration Docker Compose
+├── nginx.conf             # Fichier de configuration Nginx pour le reverse proxy
+├── root                   # Répertoire contenant les fichiers statiques
+│   └── index.html         # Fichier HTML principal à servir
+└── README.md              # Fichier README du projet
+
  ```
 ## 🔧 Prérequis
 

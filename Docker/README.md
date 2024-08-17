@@ -2,7 +2,8 @@
  ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
  ![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
  ![Alpine](https://img.shields.io/badge/Alpine%20Linux-0D597F?style=for-the-badge&logo=alpinelinux&logoColor=white)
- Ce projet configure et déploie le serveur web Quark pour du contenu statique, derrière un reverse proxy Nginx, en utilisant Docker et Docker Compose.
+ 
+Ce projet configure et déploie le serveur web Quark pour du contenu statique, derrière un reverse proxy Nginx, en utilisant Docker et Docker Compose.
  ## 📋 Table des Matières
 - [🌐 Serveur Quark Dockerisé avec Reverse Proxy Nginx](#-serveur-quark-dockerisé-avec-reverse-proxy-nginx)
   - [📋 Table des Matières](#-table-des-matières)

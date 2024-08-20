@@ -1,0 +1,28 @@
+- name: Create user edgar
+  ansible.builtin.user:
+    name: "{{ edgar_username }}"
+    shell: "{{ edgar_shell }}"
+    state: present
+
+- name: Add edgar to sudoers
+  ansible.builtin.template:
+    src: "{{ sudoers_file_template }}"
+    dest: /etc/sudoers.d/{{ edgar_username }}
+    mode: '0440'
+    validate: 'visudo -cf %s'
+
+- name: Set up SSH directory for edgar
+  file:
+    path: /home/{{ edgar_username }}/.ssh
+    state: directory
+    owner: "{{ edgar_username }}"
+    group: "{{ edgar_username }}"
+    mode: '0700'
+
+- name: Add authorized_keys for edgar
+  ansible.builtin.copy:
+    src: "{{ ssh_key_path }}"
+    dest: /home/{{ edgar_username }}/.ssh/authorized_keys
+    owner: "{{ edgar_username }}"
+    group: "{{ edgar_username }}"
+    mode: '0600'

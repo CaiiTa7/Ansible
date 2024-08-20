@@ -1,0 +1,6 @@
+- name: Ensure basic packages are installed
+  ansible.builtin.package:
+    name: 
+      - sudo
+      - openssh-server
+    state: present

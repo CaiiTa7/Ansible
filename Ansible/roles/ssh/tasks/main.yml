@@ -1,0 +1,16 @@
+- name: Apply sshd_config template
+  ansible.builtin.template:
+    src: "{{ sshd_config_template }}"
+    dest: /etc/ssh/sshd_config
+    mode: '0600'
+  notify:
+    - Restart SSH
+
+- name: Allow only the edgar user to connect via SSH
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^AllowUsers'
+    line: 'AllowUsers {{ edgar_username }}'
+    state: present
+  notify:
+    - Restart SSH

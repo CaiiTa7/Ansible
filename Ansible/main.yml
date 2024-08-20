@@ -1,0 +1,15 @@
+- hosts: all
+  become: yes
+  vars:
+    edgar_username: edgar
+    edgar_shell: /bin/bash
+    ssh_key_path: /path/to/provided_public_key
+    sshd_config_template: sshd_config.j2
+    sudoers_file_template: sudoers_file.j2
+  roles:
+    - role: common
+      tags: ['common', 'init']
+    - role: users
+      tags: ['users', 'edgar']
+    - role: ssh
+      tags: ['ssh', 'security']
